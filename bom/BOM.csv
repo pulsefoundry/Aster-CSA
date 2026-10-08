@@ -1,0 +1,14 @@
+Designator,Quantity,Value/Part,Package,LCSC Part,Assembly,Notes
+U1,1,OPA192IDR,SOIC-8,C2861286,FIT,Charge-sensitive amplifier
+D1,1,BAV199-7-F,SOT-23,C155248,FIT,Low-leakage input clamp; not a 1 kV surge protector
+R21,1,2.2 kOhm 1%,0805,C17520,FIT,Input current limiting and isolation
+R22 R23,2,2 MOhm 1%,0805,C114532,FIT,Series pair gives about 4 MOhm feedback
+R24,1,47 Ohm 1%,0805,C17714,FIT,Analog-output source damping
+R25,1,1 kOhm 1%,0805,C17513,FIT,Test-input series resistor
+R26,1,1 MOhm 1%,0805,C17514,FIT,Test-input return
+R27,1,0 Ohm,0805,C25275,FIT,CHASSIS-to-AGND configuration link
+R31 R32 R33 R34 R35,5,2 MOhm 1% 0.25 W,Axial through-hole D2.4xL6.3 P10.5 mm,C173055,FIT,Five-part local detector-bias feed chain
+C4 C11,2,1 pF C0G 50 V,0805,C1786,FIT,C4 feedback; C11 test charge injection
+C7 C9,2,100 nF X7R 50 V,0805,C49678,FIT,Local high-frequency supply decoupling
+C8 C10,2,4.7 uF X7R 25 V,0805,C162427,FIT,Local bulk supply decoupling
+J4 J5,2,Amphenol 132134 vertical SMA female,Through-hole,C3174425,FIT,Verify footprint against purchased connector

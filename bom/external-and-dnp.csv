@@ -1,0 +1,8 @@
+Designator,Quantity,Value/Part,Mechanical form,Status,Notes
+C2 C3,2,1 nF 3 kV C0G,1812 adapted to original through-hole pads,EXTERNAL,As-built detector AC coupling; mechanically secure short adapter leads
+C12,1,1 nF 3 kV C0G,1812 adapted to original through-hole pads,EXTERNAL,As-built high-voltage filtering/coupling
+C5,1,4.7 pF C0G,0603,DNP,Optional feedback adjustment
+C6,1,10 pF C0G,0603,DNP,Optional feedback adjustment
+J1 J2,2,High-voltage coax pigtail landing,Wire landing,EXTERNAL,Detector and external-bias coax connections
+J3,1,+5 V / AGND / -5 V connector,Micro-Fit 3.0 1x3 or direct wiring,EXTERNAL,Verify pin order before power-up
+H1 H2 H3 H4,4,M3 mounting hole,NPTH,MECHANICAL,No purchased component
