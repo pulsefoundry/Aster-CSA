@@ -1,12 +1,16 @@
-# Low-Cost CSA
+# Aster CSA
 
 [中文说明](README.zh-CN.md)
 
-An experimental, low-cost charge-sensitive preamplifier (CSA) and detector bias-tee for radiation-detector pulse experiments.
+An open, low-cost charge-sensitive preamplifier (CSA) and detector bias-tee in the Aster nuclear-instrumentation series.
 
 The board uses a single OPA192, a 1 pF nominal feedback capacitor, approximately 4 MΩ feedback resistance, an onboard charge-injection input, and a 47 Ω damped analog output. It was designed for a single-wire detector connection in which detector bias and signal share one coaxial conductor. The high-voltage supply itself is **not** included.
 
 > **Prototype status:** one assembled board has passed low-voltage power, baseline and onboard charge-injection tests. It has not completed precision calibration, detector counting validation, EMC testing or safety certification.
+
+![Aster CSA assembled prototype under test](docs/images/prototype/aster-csa-prototype-board.jpg)
+
+*Assembled Aster CSA Rev.D prototype during the onboard charge-injection test.*
 
 ![Assembly map](docs/images/assembly-map.png)
 
@@ -21,10 +25,37 @@ The board uses a single OPA192, a 1 pF nominal feedback capacitor, approximately
 | Nominal decay constant | approximately 4 µs |
 | Theoretical charge gain | approximately 1 V/pC |
 | Preliminary measured charge gain | approximately 0.60–0.64 V/pC |
+| Observed rise-to-peak time | approximately 3 µs |
+| Observed full recovery | approximately 20 µs |
+| Noise / ENC | not yet measured |
 | Analog output | SMA, 47 Ω source damping |
 | Test input | SMA, onboard 1 pF charge-injection capacitor |
 
-The measured result is preliminary. It was obtained with a nominal 0–3 V, 1 kHz oscilloscope calibration square wave, an external 5.65 kΩ series resistor and the onboard 1 pF injection capacitor. The observed output peak was approximately 1.8–1.9 V. The calibration output is not a precision source, and the two 1 pF capacitors have wide absolute tolerance, so this result should not be treated as a traceable calibration.
+## Preliminary charge-injection result
+
+The measured result is preliminary. It was obtained with a nominal 0–3 V, 1 kHz oscilloscope calibration square wave, an external 5.65 kΩ series resistor and the onboard nominal 1 pF injection capacitor. The observed output peak was approximately 1.84–1.92 V.
+
+Using the nominal component values:
+
+- injected charge: `Q = C_inj × ΔV = 1 pF × 3 V = 3 pC`;
+- measured charge gain: `1.84–1.92 V / 3 pC = 0.61–0.64 V/pC`;
+- average measured gain: approximately `0.63 V/pC`;
+- equivalent feedback capacitance inferred from `C = Q / V_peak`: approximately `1.56–1.63 pF`, or about `1.60 pF` at the average peak;
+- nominal feedback time constant: `4 MΩ × 1 pF = 4 µs`; five time constants are approximately `20 µs`, consistent with the observed return to baseline.
+
+The pulse reached its peak in approximately 3 µs and was effectively back at baseline after approximately 20 µs. At the 1 kHz square-wave test frequency, successive edges were 500 µs apart, so no visible pile-up was expected. The oscilloscope calibration output is not a precision source, the capacitor tolerances and parasitics are significant at 1 pF, and the 5.65 kΩ series resistor interacts with the test network. These figures are therefore a functional estimate, not a traceable calibration. Noise spectral density and equivalent noise charge (ENC) have not yet been measured.
+
+![Aster CSA pulse leading edge](docs/images/prototype/aster-csa-pulse-rise.jpg)
+
+*Observed leading edge and peak. The measured rise-to-peak interval is approximately 3 µs.*
+
+![Aster CSA pulse recovery](docs/images/prototype/aster-csa-pulse-recovery.jpg)
+
+*The output returns close to baseline in approximately 20 µs.*
+
+![Aster CSA bench setup](docs/images/prototype/aster-csa-bench-setup.jpg)
+
+*Bench setup used for the first functional charge-injection test.*
 
 ## Signal path
 
@@ -56,7 +87,7 @@ A positive step at `TEST_IN` produces a negative-going output pulse. A square wa
 
 ## Repository contents
 
-- `hardware/Low-Cost-CSA-RevD-EasyEDA-Pro.epro2` — native EasyEDA Pro project containing schematic and four-layer PCB.
+- `hardware/Aster-CSA-RevD-EasyEDA-Pro.epro2` — native EasyEDA Pro project containing schematic and four-layer PCB.
 - `docs/assembly-checklist.xlsx` — assembly and bring-up checklist.
 - `bom/BOM.csv` — per-board BOM with LCSC ordering numbers where available.
 - `bom/external-and-dnp.csv` — high-voltage capacitors, connectors, mechanical parts and optional parts.
@@ -110,6 +141,7 @@ This is an experimental laboratory design, not a certified high-voltage product.
 
 - The sensitive summing-node trace is longer than ideal and may increase parasitic capacitance and pickup.
 - The measured charge gain is lower than the nominal calculation and requires calibration with a known pulse source.
+- Noise spectral density and equivalent noise charge (ENC) have not yet been measured.
 - The current test only proves low-voltage CSA and injection-path operation; detector counting remains to be validated.
 - High-voltage blocking capacitors and some connectors must be sourced separately.
 
